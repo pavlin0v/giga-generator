@@ -53,14 +53,18 @@
             android:lineSpacingMultiplier="1.2"
             android:text="Здесь могла бы быть ваша реклама Здесь могла бы быть ваша реклама Здесь могла бы быть ваша реклама Здесь могла бы быть ваша реклама Здесь могла бы быть ваша реклама Здесь могла бы быть ваша реклама Здесь могла бы быть ваша реклама Здесь могла бы быть ваша реклама Здесь могла бы быть ваша реклама Здесь могла бы быть ваша реклама Здесь могла бы быть ваша реклама Здесь могла бы быть ваша реклама Здесь могла бы быть ваша реклама Здесь могла бы быть ваша реклама Здесь могла бы быть ваша реклама Здесь могла бы быть ваша реклама Здесь могла бы быть ваша реклама Здесь могла бы быть ваша реклама Здесь могла бы быть ваша реклама Здесь могла бы быть ваша реклама Здесь могла бы быть ваша реклама Здесь могла бы быть ваша реклама Здесь могла бы быть ваша реклама Здесь могла бы быть ваша реклама Здесь могла бы быть ваша реклама Здесь могла бы быть ваша реклама Здесь могла бы быть ваша реклама Здесь могла бы быть ваша реклама Здесь могла бы быть ваша реклама Здесь могла бы быть ваша реклама Здесь могла бы быть ваша реклама Здесь могла бы быть ваша реклама Здесь могла бы быть ваша реклама Здесь могла бы быть ваша реклама Здесь могла бы быть ваша реклама Здесь могла бы быть ваша реклама Здесь могла бы быть ваша реклама "
             android:textColor="#000000"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:textAlignment="viewStart"
+            android:justificationMode="inter_word"
+
+            />
     </ScrollView>
 
     <EditText
         android:id="@+id/number_sentences"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="25dp"
         android:ems="10"
         android:hint="Кол-во предложений"
         android:inputType="number"
@@ -85,4 +89,20 @@
         android:textSize="32sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/info_button"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginBottom="40dp"
+        android:backgroundTint="@color/white"
+        android:minWidth="0dp"
+        android:minHeight="0dp"
+        android:padding="8dp"
+        android:text="ℹ️"
+        android:textSize="32sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+         />
 </androidx.constraintlayout.widget.ConstraintLayout>

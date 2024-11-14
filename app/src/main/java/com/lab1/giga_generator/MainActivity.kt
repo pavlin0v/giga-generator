@@ -8,7 +8,6 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import kotlin.random.Random
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 
 
@@ -26,16 +25,19 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // Показываем диалоговое окно с инструкцией
         showWelcomeMessage()
 
-
+        // Получаем ссылки на элементы интерфейса
         val animatedTextView = findViewById<TextView>(R.id.animatedTextView)
         val text = findViewById<TextView>(R.id.scrollable_text)
         val numberSentences = findViewById<TextView>(R.id.number_sentences)
         val createButton = findViewById<Button>(R.id.create_button)
+        val infoButton = findViewById<Button>(R.id.info_button)
 
+        // Обработчик нажатия на кнопку с генерацией текста
         createButton.setOnClickListener {
-            val sentanceAmount = numberSentences.text.toString().toInt()
+            val sentanceAmount = numberSentences.text.toString().toIntOrNull() ?: 0
             if (sentanceAmount > 0) {
                 text.text = ""
                 text.append("         ")
@@ -43,8 +45,8 @@ class MainActivity : AppCompatActivity() {
 
                     text.append(stringBulder().toString())
                     text.append(" ")
-                    if (i % 5 == 0) {
-                        // Добавляем перенос строки после каждого пятоdjго предложения
+                    // Добавляем перенос строки после раномного предложения
+                    if (i % Random.nextInt(3,5) == 0) {
                         text.append("\n")
                         text.append("         ")
                     }
@@ -52,12 +54,16 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-
+        // Обработчик нажатия на кнопку с инструкцией
+        infoButton.setOnClickListener {
+            showWelcomeMessage()
+        }
 
         // Запускаем обновление текста
         startTextSwitcher(animatedTextView)
     }
 
+    // Функция для генерации случайной строки
     private fun stringBulder(): Any {
         val first = arrayOf(
             "Согласно результатам исследований",
@@ -105,7 +111,7 @@ class MainActivity : AppCompatActivity() {
         return first[Random.nextInt(first.size)] + " " + second[Random.nextInt(second.size)] + " " + third[Random.nextInt(third.size)] + " " + fourth[Random.nextInt(fourth.size)] + "."
     }
 
-
+    // Функция для переключения текста
     private fun startTextSwitcher(textView: TextView) {
         val updateTextRunnable = object : Runnable {
             override fun run() {
@@ -124,24 +130,14 @@ class MainActivity : AppCompatActivity() {
         handler.post(updateTextRunnable)
     }
 
+    // Функция для диалогового окна с инструкцией
     private fun showWelcomeMessage() {
         val welcomeMessage = "«Генератор бесконечной речи»\n1. Пользователь выбирает количество предложений, которое должно содержаться в речи.\n2. Программа склеивает речь из случайных массивов 4-х категорий.".trimIndent() // trimIndent() removes extra indentation
 
-        // You can display the message using an AlertDialog:
         AlertDialog.Builder(this)
             .setTitle("Инструкция")
             .setMessage(welcomeMessage)
             .setPositiveButton("OK", null)
             .show()
-
-        // Alternatively, you can display it in a TextView:
-        // val welcomeTextView = findViewById<TextView>(R.id.welcomeTextView)
-        // welcomeTextView.text = welcomeMessage
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        // Удаляем все запланированные задачи, чтобы избежать утечек памяти
-        handler.removeCallbacksAndMessages(null)
     }
 }
